@@ -1,14 +1,32 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content padding (click)='reloadPage()'>
+  <div>
+    <ion-grid *ngIf="clima && icono && titulo && frase">
+      <ion-row>
+        <ion-col>
+          <i class="fas {{icono}} fa-7x" ></i>
+          <div style="text-align: right">
+            <h1 style="display: inline-block; margin-top:0px"> {{ clima.temp_c }} </h1>
+            <h1 style="display: inline-block; margin-top:0px"> c </h1>
+          </div>
+        </ion-col>
+        <ion-col>
+            <h1 style="display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            height: 100%;text-align: center"> {{ titulo }} </h1>
+        </ion-col>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+      </ion-row>
+      <ion-row>
+        <ion-col style="margin-top:120px">
+          <h1 style="display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+          height: 100%;font-size: 70px;">
+            {{ frase }}
+          </h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
