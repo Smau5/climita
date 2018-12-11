@@ -10,12 +10,12 @@ export class ClimaProvider {
   constructor(public http: HttpClient) {
     console.log('Hello ClimaProvider Provider');
     //https://www.apixu.com/
-    this.url = "http://api.apixu.com/v1/current.json?key=" + this.apiKey + "&q=santa cruz";
+    this.url = "http://api.apixu.com/v1/current.json?key=" + this.apiKey + "&q=";
 
   }
 
-  getClima():any{
-    return this.http.get(this.url + '.json.')
+  getClima(latitude:any, longitude:any):any{
+    return this.http.get(this.url + latitude + ',' + longitude)
       .map(res=> res);
   }
 

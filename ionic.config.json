@@ -1,5 +1,8 @@
 {
   "name": "climita",
-  "integrations": {},
-  "type": "ionic-angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "0fe4f3ba"
 }
