@@ -1,4 +1,4 @@
-<ion-content padding (click)='reloadPage()'>
+<ion-content padding (click)='cambiarFrase();changeBgColor();' [ngStyle]="{'background-color': bgColor}">
   <div>
     <ion-grid *ngIf="clima && icono && titulo && frase && latitude && longitude">
       <ion-row>

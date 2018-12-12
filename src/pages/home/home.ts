@@ -24,6 +24,10 @@ export class HomePage {
   frase: string;
   latitude: any;
   longitude: any;
+  bgColor: string = '#252e45';
+  bgUltimoColor = -1;
+  ultimaFrase = -1;
+
   constructor(public navCtrl: NavController,
     private climaProvider: ClimaProvider,
     public geolication: Geolocation) {
@@ -61,11 +65,16 @@ export class HomePage {
         "Ponete bota que se te entra la nigua."
       ];
       this.frasesCalor = [
-        "Chamuscau."
+        "Chamuscau.",
+        "Calorsiño.",
+        "Calorr.",
+        "La calorrrr."
       ];
       this.frasesNatural = [
         "Cutuchi."
       ];
+
+      this.changeBgColor();
   }
 
   ionViewWillEnter(){
@@ -80,13 +89,19 @@ export class HomePage {
     .subscribe( clima  => {
       console.log(clima.current);
       this.clima = clima.current;
-    
-      if(this.climas[clima.current.condition.text] == null){
+      this.cambiarFrase();
+
+    });
+  }
+
+  public cambiarFrase(){
+    if(this.clima != null){
+      if(this.climas[this.clima.condition.text] == null){
         this.icono = "fa-question";
         this.titulo = "?";
       }else{
-        this.icono = this.climas[clima.current.condition.text].icono;
-        this.titulo = this.climas[clima.current.condition.text].titulo;
+        this.icono = this.climas[this.clima.condition.text].icono;
+        this.titulo = this.climas[this.clima.condition.text].titulo;
       }
       this.frase = "?";
       var temp  = Number( this.clima.temp_c)
@@ -97,17 +112,43 @@ export class HomePage {
         this.frase = this.frasesFrio[Math.floor(Math.random()*this.frasesFrio.length)];
       }
       if(temp >= 25 && temp < 35){
-        this.frase = "Calorsiño."
+        this.frase = this.frasesCalor[Math.floor(Math.random()*this.frasesCalor.length)];
       }
       if(temp >= 35){
         this.frase = "Santa Cruz de la Sierra."
       }
       console.log(temp);
-    });
+    }
+  }
+
+  public changeBgColor(){
+    let listaColores = [
+      '#252e45',
+      '#a19e80',
+      '#c86c48',
+      '#869f90',
+      '#971849',
+      '#6dc0ec',
+      '#1162bc',
+      '#b271a7'
+      
+
+    ];
+    var hayColor = false;
+    while(!hayColor){
+      var random = Math.floor(Math.random() * listaColores.length);
+      if(random != this.bgUltimoColor){
+        this.bgColor = listaColores[random];
+        this.bgUltimoColor = random;
+        hayColor = true;
+      }
+    }
+
+    
   }
 
   public reloadPage(){
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    //this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
 }
